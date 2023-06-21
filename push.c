@@ -9,10 +9,15 @@
  * Return: new node from stack
  */
 
-void push(stack_t **stack, unsigned int line_number)
+void push_stack(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
 	stack_t *current;
 
+	if (!stack)
+	{
+		fprintf(stderr, "Error: Stack not initialized\n");
+		exit(1);
+	}
 	current = malloc(sizeof(stack_t));
 	if (current == NULL)
 	{
@@ -23,9 +28,7 @@ void push(stack_t **stack, unsigned int line_number)
 	current->n = num;
 	current->prev = NULL;
 
-	if (!stack)
-		return (1);
-
+	
 	if (*stack == NULL)
 	{
 		current->next = NULL;
