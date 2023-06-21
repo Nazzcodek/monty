@@ -9,7 +9,7 @@
  * Return: new node from stack
  */
 
-void op_push(stack_t **stack, unsigned int line_number)
+void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *top = NULL, *new_node;
 
