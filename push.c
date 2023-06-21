@@ -15,6 +15,8 @@ void push(stack_t **stack, unsigned int line_number)
 	char *arg = strtok(NULL, " \n");
 	int value = atoi(arg);
 
+	printf("Stack value: %p\n", (void*)*stack);
+
 	if (!(*stack))
 	{
 		fprintf(stderr, "Error: L%d: Stack not initialized\n", line_number);

@@ -8,38 +8,32 @@
  * Return: line to be run
  */
 
-void run_monty(FILE *file)
+void run_monty(FILE *file, stack_t **stack)
 {
-	char opcode[100], line[100];
-	unsigned int line_number = 1;
-	stack_t *stack = NULL;
+	char line[100], *token;
+	unsigned int line_number = 0;
 
 	while (fgets(line, sizeof(line), file))
 	{
-		if (sscanf(line, "%99s", opcode) != 1)
-		{
-			fprintf(stderr, "Error: L%d: invalid instruction format\n",
-					line_number);
-			fclose(file);
-			exit(EXIT_FAILURE);
-		}
+		line_number++;
 
-		if (strcmp(opcode, "push") == 0)
-		{
-			push(&stack, line_number);
-		}
-		else if (strcmp(opcode, "pall") == 0)
-		{
-			pall(&stack, line_number);
-		}
+		token = strtok(line, " \n");
+		if (!token || !(*token))
+			continue;
+
+		if (strcmp(token, "push") == 0)
+			push(stack, line_number);
+		else if (strcmp(token, "pall") == 0)
+			pall(stack, line_number);
 		else
 		{
 			fprintf(stderr, "Error: L%d: unknown instruction %s\n",
-				line_number, opcode);
+				line_number, token);
 			fclose(file);
 			exit(EXIT_FAILURE);
 		}
-
-		line_number++;
 	}
+
+	fclose(file);
+	exit(EXIT_SUCCESS);
 }

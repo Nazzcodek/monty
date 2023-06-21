@@ -16,7 +16,7 @@ void pall(stack_t **stack, unsigned int line_number)
 	{
 		fprintf(stderr, "Error: L%d: Stack not initialized\n", line_number);
 		exit(EXIT_FAILURE);
-
+	}
 	while (current)
 	{
 		printf("%d\n", current->n);

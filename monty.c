@@ -12,6 +12,7 @@
 int main(int argc, char *argv[])
 {
 	FILE *file;
+	stack_t *stack = NULL;
 
 	if (argc != 2)
 	{
@@ -26,8 +27,7 @@ int main(int argc, char *argv[])
 		return (EXIT_FAILURE);
 	}
 
-	run_monty(file);
+	run_monty(file, &stack);
 
-	fclose(file);
-	return (0);
+	return (EXIT_SUCCESS);
 }
