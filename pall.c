@@ -12,7 +12,7 @@ void pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
 
-	if (!stack)
+	if (!(*stack))
 	{
 		fprintf(stderr, "Error: L%d: Stack not initialized\n", line_number);
 		exit(EXIT_FAILURE);
