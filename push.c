@@ -9,35 +9,45 @@
  * Return: new node from stack
  */
 
-void push(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *current;
+	stack_t *new_node;
+	char *arg = strtok(NULL, " \n");
+	int value = atoi(arg);
 
-	if (!stack)
+	if (!(*stack))
 	{
-		fprintf(stderr, "Error: Stack not initialized\n");
-		exit(1);
-	}
-	current = malloc(sizeof(stack_t));
-	if (current == NULL)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(1);
+		fprintf(stderr, "Error: L%d: Stack not initialized\n", line_number);
+		exit(EXIT_FAILURE);
 	}
 
-	current->n = num;
-	current->prev = NULL;
+	new_node = malloc(sizeof(stack_t));
+	if (!new_node)
+	{
+		fprintf(stderr, "Error: L%d: malloc failed\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 
-	
-	if (*stack == NULL)
+	if (!arg || !(*arg))
 	{
-		current->next = NULL;
-		*stack = current;
+		fprintf(stderr, "Error: L%d: usage: push integer\n", line_number);
+		free(new_node);
+		exit(EXIT_FAILURE);
 	}
-	else
+
+	if (value == 0 && *arg != '0')
 	{
-		current->next = *stack;
-		(*stack)->prev = current;
-		*stack = current;
+		fprintf(stderr, "Error: L%d: usage: push integer\n", line_number);
+		free(new_node);
+		exit(EXIT_FAILURE);
 	}
+
+	new_node->n = value;
+	new_node->prev = NULL;
+	new_node->next = *stack;
+
+	if (*stack)
+		(*stack)->prev = new_node;
+
+	*stack = new_node;
 }
