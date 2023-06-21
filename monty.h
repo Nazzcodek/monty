@@ -39,4 +39,5 @@ int main(int argc, char *argv[]);
 void run_monty(FILE *file);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+
 #endif /* MONTY_H */
