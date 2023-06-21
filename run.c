@@ -4,6 +4,7 @@
  * run_monty - run the monty interactive
  *
  * @file: file to be run
+ * @stack: struct stack
  *
  * Return: line to be run
  */
