@@ -26,6 +26,8 @@ void run_monty(FILE *file, stack_t **stack)
 			push(stack, line_number);
 		else if (strcmp(token, "pall") == 0)
 			pall(stack, line_number);
+		else if (strcmp(token, "pint") == 0)
+			pint(stack, line_number);
 		else
 		{
 			fprintf(stderr, "Error: L%d: unknown instruction %s\n",
