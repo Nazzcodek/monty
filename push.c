@@ -1,5 +1,6 @@
 #include "monty.h"
 
+int num;
 /**
  * push - the push function
  *
@@ -9,45 +10,32 @@
  * Return: new node from stack
  */
 
-void push(stack_t **stack, unsigned int line_number)
+void push_stack(stack_t **stack, unsigned int line_number)
 {
-	stack_t *new_node;
-	char *arg = strtok(NULL, " \n");
-	int value = atoi(arg);
+	stack_t *current;
 
-	if (!(*stack))
+	current = malloc(sizeof(stack_t));
+	if (current == NULL)
 	{
-		fprintf(stderr, "Error: L%d: Stack not initialized\n", line_number);
-		exit(EXIT_FAILURE);
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(1);
 	}
 
-	new_node = malloc(sizeof(stack_t));
-	if (!new_node)
+	current->n = num;
+	current->prev = NULL;
+
+	if (!stack)
+		return (1);
+
+	if (*stack == NULL)
 	{
-		fprintf(stderr, "Error: L%d: malloc failed\n", line_number);
-		exit(EXIT_FAILURE);
+		current->next = NULL;
+		*stack = current;
 	}
-
-	if (!arg || !(*arg))
+	else
 	{
-		fprintf(stderr, "Error: L%d: usage: push integer\n", line_number);
-		free(new_node);
-		exit(EXIT_FAILURE);
+		current->next = *stack;
+		(*stack)->prev = current;
+		*stack = current;
 	}
-
-	if (value == 0 && *arg != '0')
-	{
-		fprintf(stderr, "Error: L%d: usage: push integer\n", line_number);
-		free(new_node);
-		exit(EXIT_FAILURE);
-	}
-
-	new_node->n = value;
-	new_node->prev = NULL;
-	new_node->next = *stack;
-
-	if (*stack)
-		(*stack)->prev = new_node;
-
-	*stack = new_node;
 }
