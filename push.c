@@ -9,7 +9,7 @@
  * Return: new node from stack
  */
 
-void push_stack(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void push(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
 	stack_t *current;
 
