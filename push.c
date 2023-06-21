@@ -1,6 +1,5 @@
 #include "monty.h"
 
-int num;
 /**
  * push - the push function
  *
@@ -10,7 +9,7 @@ int num;
  * Return: new node from stack
  */
 
-void push_stack(stack_t **stack, unsigned int line_number)
+void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current;
 
